@@ -104,15 +104,6 @@ public abstract class BaseDrawer extends AppCompatActivity implements AdapterVie
         navDrawerItems = new ArrayList<NavDrawerItems>();
 
         navDrawerItems.add(new NavDrawerItems(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
-        navDrawerItems.add(new NavDrawerItems(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-        navDrawerItems.add(new NavDrawerItems(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
-        navDrawerItems.add(new NavDrawerItems(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
-        navDrawerItems.add(new NavDrawerItems(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
-        navDrawerItems.add(new NavDrawerItems(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
-        navDrawerItems.add(new NavDrawerItems(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
-        navDrawerItems.add(new NavDrawerItems(navMenuTitles[7], navMenuIcons.getResourceId(7, -1)));
-        navDrawerItems.add(new NavDrawerItems(navMenuTitles[8], navMenuIcons.getResourceId(8, -1)));
-        navDrawerItems.add(new NavDrawerItems(navMenuTitles[9], navMenuIcons.getResourceId(9, -1)));
 
         // Recycle the typed array
         navMenuIcons.recycle();

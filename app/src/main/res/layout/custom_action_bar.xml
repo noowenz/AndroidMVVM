@@ -45,7 +45,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:text="TITLE"
-            fontPath="fonts/Raleway-Regular.ttf"
+            fontPath="fonts/SourceSansPro-SemiBold.ttf"
             android:textSize="@dimen/txt_23" />
 
     </RelativeLayout>
