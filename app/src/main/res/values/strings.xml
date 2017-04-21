@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">News</string>
+    <string name="logOut_msg">Are you sure you want to log out?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+
+    <string-array name="nav_drawer_items">
+        <item>Jobs</item>
+        <item>Ongoing Job</item>
+        <item>Completed Jobs</item>
+        <item>Job Offers</item>
+        <item>Messages</item>
+        <item>T&amp;Cs</item>
+        <item>Privacy Policy</item>
+        <item>Availability</item>
+        <item>Profile</item>
+        <item>Logout</item>
+    </string-array>
+
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_arrow_left_black</item>
+        <item>@drawable/ic_arrow_left_black</item>
+        <item>@drawable/ic_arrow_left_black</item>
+        <item>@drawable/ic_arrow_left_black</item>
+        <item>@drawable/ic_arrow_left_black</item>
+        <item>@drawable/ic_arrow_left_black</item>
+        <item>@drawable/ic_arrow_left_black</item>
+        <item>@drawable/ic_arrow_left_black</item>
+        <item>@drawable/ic_arrow_left_black</item>
+        <item>@drawable/ic_arrow_left_black</item>
+    </array>
+
+</resources>

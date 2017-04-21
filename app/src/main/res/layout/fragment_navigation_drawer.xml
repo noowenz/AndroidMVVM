@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="right"
+    android:layout_marginLeft="60dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_nav_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space100"
+        android:background="@color/red"
+        android:orientation="horizontal"
+        android:gravity="left|center">
+
+        <ImageView
+            android:id="@+id/iv_schedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/space15"
+            android:src="@drawable/ic_arrow_left_black" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            fontPath="fonts/SourceSansPro-SemiBold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/space15"
+            android:layout_toRightOf="@+id/iv_schedule"
+            android:text="Categories"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txt_20" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_slidermenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_nav_header"
+        android:choiceMode="singleChoice"
+        android:divider="@null"
+        android:dividerHeight="0dp">
+
+    </ListView>
+
+</RelativeLayout>
+
