@@ -2,7 +2,7 @@ package com.official.news.helpers;
 
 import android.app.Activity;
 import android.content.Intent;
-import com.official.news.HomeActivity;
+import com.official.news.activities.HomeActivity;
 import com.official.news.R;
 
 
