@@ -3,14 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.official.news.activities.HomeActivity">
+    tools:context="com.official.noowenz.home.view.HomeActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_news"
+    <LinearLayout
+        android:id="@+id/ll_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_news"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_no_news"
+        fontPath="fonts/Raleway-SemiBold.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/space10"
+        android:gravity="center"
+        android:text="@string/no_news_available"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/txt_20"
+        android:visibility="gone" />
 
 </RelativeLayout>

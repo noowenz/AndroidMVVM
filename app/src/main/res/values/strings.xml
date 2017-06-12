@@ -1,16 +1,21 @@
 <resources>
-    <string name="app_name">News</string>
+    <string name="app_name">NoowenzArc</string>
     <string name="logOut_msg">Are you sure you want to log out?</string>
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
+    <string name="no_news_available">No news \n available.</string>
+    <string name="internal_server_error">Internal server error.</string>
+    <string name="no_internet">No internet connection available.</string>
+    <string name="err_server">Unable to process request. Please try again.</string>
 
     <string-array name="nav_drawer_items">
         <item>Home</item>
-        <item>Ongoing Job</item>
+        <item>About</item>
     </string-array>
 
     <array name="nav_drawer_icons">
-        <item>@drawable/ic_arrow_left_black</item>
+        <item>@drawable/ic_home_black</item>
+        <item>@drawable/ic_info_black</item>
     </array>
 
 </resources>

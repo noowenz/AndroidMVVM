@@ -3,18 +3,20 @@
 
     <item android:drawable="@color/colorPrimary" />
 
+    <!--<item>-->
+    <!--<bitmap android:src="@drawable/ic_home_black" />-->
+    <!--<color android:color="@color/white" />-->
+    <!--</item>-->
+
     <item>
-        <!--<bitmap-->
-            <!--android:src="@drawable/splash_screen_bg" />-->
-        <color android:color="@android:color/white"/>
+        <color android:color="@color/colorPrimary" />
     </item>
 
-    <!--<item android:top="@dimen/space66">-->
-        <!--<bitmap-->
-            <!--android:gravity="top"-->
-            <!--android:src="@drawable/ic_crewgo_logo_icon" >-->
-            <!--</bitmap>-->
-
-    <!--</item>-->
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_home_black">
+        </bitmap>
+    </item>
 
 </layer-list>

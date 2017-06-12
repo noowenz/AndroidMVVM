@@ -28,10 +28,10 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/space10"
             android:layout_marginRight="@dimen/space10"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_arrow_drop_down_circle"
+            android:src="@drawable/ic_menu"
             android:background="@android:color/transparent"
             android:visibility="visible" />
 
@@ -45,6 +45,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:text="TITLE"
+            android:textColor="@color/red"
             fontPath="fonts/SourceSansPro-SemiBold.ttf"
             android:textSize="@dimen/txt_23" />
 
