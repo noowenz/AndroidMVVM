@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.official.noowenz.home.view.HomeActivity">
+    tools:context="com.official.noowenz1.home.view.HomeActivity">
 
     <LinearLayout
         android:id="@+id/ll_news"

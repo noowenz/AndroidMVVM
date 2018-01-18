@@ -11,7 +11,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.official.noowenz"
+        applicationId "com.official.noowenz1"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.official.noowenz">
+    package="com.official.noowenz1">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.official.noowenz.utils.MyApplication"
+        android:name="com.official.noowenz1.utils.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
-        <activity android:name="com.official.noowenz.home.view.HomeActivity"
+        <activity android:name="com.official.noowenz1.home.view.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
