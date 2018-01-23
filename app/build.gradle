@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'AndroidMVVM'
+            keyPassword 'android'
+            storeFile file('E:/keystores/AndroidMVVM/AndroidMVVM.jks')
+            storePassword 'android'
+        }
+    }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
@@ -8,62 +16,84 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
 
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
-        applicationId "com.official.noowenz1"
-        minSdkVersion 16
-        targetSdkVersion 25
+        applicationId "com.official.android_mvvm"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        appstaging {
+            initWith(buildTypes.debug)
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        live {
+            initWith(buildTypes.debug)
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
+    compile "com.android.support:recyclerview-v7:${rootProject.supportLibraryVersion}"
+    compile "com.android.support:design:${rootProject.supportLibraryVersion}"
+    compile "com.android.support.constraint:constraint-layout:${rootProject.constraintLayoutVersion}"
+    testCompile "junit:junit:${rootProject.junitVersion}"
 
     //multidex
-    compile 'com.android.support:multidex:1.0.1'
+    compile "com.android.support:multidex:${rootProject.supportMultidexVersion}"
 
     //Gson
-    compile 'com.google.code.gson:gson:2.6.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile "com.google.code.gson:gson:${rootProject.gsonVersion}"
 
     //Retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.0.2'
-    compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
-
-    //Dagger
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.2'
-    compile 'com.google.dagger:dagger:2.2'
-    provided 'javax.annotation:jsr250-api:1.0'
+    compile "com.squareup.retrofit2:converter-gson:${rootProject.retrofit2Version}"
+    compile "com.squareup.retrofit2:retrofit:${rootProject.retrofit2Version}"
+    compile "com.squareup.retrofit2:converter-scalars:${rootProject.retrofit2Version}"
+    compile "com.squareup.okhttp3:logging-interceptor:${rootProject.okhttp3Version}"
 
     //RxJava
-    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.1'
-    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile "io.reactivex.rxjava2:rxjava:${rootProject.rxjava2RxjavaVersion}"
+    compile "io.reactivex.rxjava2:rxandroid:${rootProject.rxjava2rxandroidVersion}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${rootProject.rxjava2adapterVersion}"
+    compile "com.jakewharton.rxbinding2:rxbinding:${rootProject.rxjava2rxbindingVersion}"
 
-    //fonts
-    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+    //Dagger 2
+    compile "com.google.dagger:dagger:${rootProject.daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
+    compile "com.google.dagger:dagger-android-support:${rootProject.daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
 
-    //butterknife
-    compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    //Viewmodel
+    compile "android.arch.lifecycle:extensions:$rootProject.lifecycle"
+    annotationProcessor "android.arch.lifecycle:compiler:$rootProject.lifecycle"
+    compile "android.arch.lifecycle:extensions:$rootProject.lifecycle"
 
+    //Butterknife
+    compile "com.jakewharton:butterknife:${rootProject.butterknifeVersion}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.butterknifeVersion}"
 }

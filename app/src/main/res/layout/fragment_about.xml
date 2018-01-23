@@ -4,17 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.official.android_mvvm.home.view.HomeActivity"
+    android:background="@color/black_effective"
     android:id="@+id/rl_home">
 
     <TextView
-        android:id="@+id/tv_msg"
+        android:id="@+id/tv_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginTop="@dimen/space10"
         android:gravity="center"
         android:text=""
-        android:textColor="@color/black_effective"
+        android:textColor="@color/white"
         android:textSize="@dimen/txt_20" />
 
 </RelativeLayout>
