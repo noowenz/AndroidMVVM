@@ -1,4 +1,4 @@
-package com.official.android_mvvm.home.model;
+package com.official.android_mvvm.ui.home.model;
 
 public class User {
 

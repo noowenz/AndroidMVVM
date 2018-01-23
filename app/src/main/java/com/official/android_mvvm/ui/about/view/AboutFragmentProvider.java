@@ -14,20 +14,15 @@
  *  limitations under the License
  */
 
-package com.official.android_mvvm.home.view;
-import com.official.android_mvvm.home.repository.HomeRepositoryImpl;
-import com.official.android_mvvm.retrofit.ApiServices;
+package com.official.android_mvvm.ui.about.view;
 
 import dagger.Module;
-import dagger.Provides;
-
+import dagger.android.ContributesAndroidInjector;
 
 @Module
-public class HomeActivityModule {
+public abstract class AboutFragmentProvider {
 
-    @Provides
-    HomeRepositoryImpl provideHomeRepositoryImpl(ApiServices apiServices) {
-        return new HomeRepositoryImpl(apiServices);
-    }
+    @ContributesAndroidInjector(modules = AboutFragmentModule.class)
+    abstract AboutFragment provideAboutFragmentFactory();
 
 }

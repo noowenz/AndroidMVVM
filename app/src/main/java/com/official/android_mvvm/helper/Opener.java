@@ -1,8 +1,8 @@
-package com.official.android_mvvm.helpers;
+package com.official.android_mvvm.helper;
 
 import android.app.Activity;
 import android.content.Intent;
-import com.official.android_mvvm.home.view.HomeActivity;
+import com.official.android_mvvm.ui.home.view.HomeActivity;
 import com.official.android_mvvm.R;
 
 

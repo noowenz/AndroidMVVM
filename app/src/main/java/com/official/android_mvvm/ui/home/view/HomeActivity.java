@@ -1,17 +1,15 @@
-package com.official.android_mvvm.home.view;
+package com.official.android_mvvm.ui.home.view;
 
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.widget.TextView;
 
 import com.official.android_mvvm.R;
-import com.official.android_mvvm.about.view.AboutFragment;
+import com.official.android_mvvm.ui.about.view.AboutFragment;
 import com.official.android_mvvm.base.BaseActivity;
-import com.official.android_mvvm.home.model.User;
-import com.official.android_mvvm.home.viewModel.HomeViewModel;
+import com.official.android_mvvm.data.common.Response;
+import com.official.android_mvvm.ui.home.viewModel.HomeViewModel;
 
 import javax.inject.Inject;
 
@@ -36,18 +34,41 @@ public class HomeActivity extends BaseActivity<HomeViewModel> implements HasSupp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        homeViewModel.getResponse().observe(this, response -> processResponse(response));
         init();
     }
 
     private void init() {
+        homeViewModel.getUser();
+    }
+
+    private void processResponse(Response response) {
+        switch (response.status) {
+            case LOADING:
+                renderLoadingState();
+                break;
+
+            case SUCCESS:
+                renderDataState(response.data);
+                break;
+
+            case ERROR:
+                renderErrorState(response.error);
+                break;
+        }
+    }
+
+    private void renderErrorState(Throwable error) {
+        hideLoading();
+    }
+
+    private void renderDataState(String data) {
+        tvMsg.setText(data);
+        hideLoading();
+    }
+
+    private void renderLoadingState() {
         showLoading();
-        homeViewModel.getUser("nabin").observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable User user) {
-                hideLoading();
-                tvMsg.setText(user.getEmail());
-            }
-        });
     }
 
     @Override

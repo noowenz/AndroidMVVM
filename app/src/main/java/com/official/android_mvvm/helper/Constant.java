@@ -1,9 +1,9 @@
-package com.official.android_mvvm.helpers;
+package com.official.android_mvvm.helper;
 
 /**
  * Created by nabin on 9/7/16.
  */
-public class CommonDef {
+public class Constant {
     public static final String TAG = "CrewgoStaff";
     public static final int REQUEST_ACCEPT_IGNORE = 03;
 
