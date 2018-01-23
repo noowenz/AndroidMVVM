@@ -1,4 +1,4 @@
-package com.official.android_mvvm.retrofit;
+package com.official.android_mvvm.data;
 
 import java.io.IOException;
 import java.net.InetAddress;

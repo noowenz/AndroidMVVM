@@ -14,11 +14,11 @@
  *  limitations under the License
  */
 
-package com.official.android_mvvm.about.view;
+package com.official.android_mvvm.ui.about.view;
 import android.content.res.Resources;
 
-import com.official.android_mvvm.about.viewModel.AboutViewModel;
-import com.official.android_mvvm.helpers.SharedPreference;
+import com.official.android_mvvm.ui.about.viewModel.AboutViewModel;
+import com.official.android_mvvm.data.SharedPreference;
 
 import dagger.Module;
 import dagger.Provides;

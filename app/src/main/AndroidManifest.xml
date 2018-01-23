@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
-        <activity android:name="com.official.android_mvvm.home.view.HomeActivity"
+        <activity android:name=".ui.home.view.HomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

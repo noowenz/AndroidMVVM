@@ -1,8 +1,8 @@
 package com.official.android_mvvm.di;
 
-import com.official.android_mvvm.about.view.AboutFragmentProvider;
-import com.official.android_mvvm.home.view.HomeActivityModule;
-import com.official.android_mvvm.home.view.HomeActivity;
+import com.official.android_mvvm.ui.about.view.AboutFragmentProvider;
+import com.official.android_mvvm.ui.home.view.HomeActivityModule;
+import com.official.android_mvvm.ui.home.view.HomeActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

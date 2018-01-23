@@ -14,17 +14,20 @@
  *  limitations under the License
  */
 
-package com.official.android_mvvm.about.viewModel;
+package com.official.android_mvvm.ui.home.view;
+import com.official.android_mvvm.ui.home.repository.HomeRepositoryImpl;
+import com.official.android_mvvm.data.ApiServices;
 
-import android.content.res.Resources;
+import dagger.Module;
+import dagger.Provides;
 
-import com.official.android_mvvm.base.BaseViewModel;
-import com.official.android_mvvm.helpers.SharedPreference;
 
-public class AboutViewModel extends BaseViewModel {
+@Module
+public class HomeActivityModule {
 
-    public AboutViewModel(SharedPreference prefs, Resources resources) {
-        super(null, prefs, resources);
+    @Provides
+    HomeRepositoryImpl provideHomeRepositoryImpl(ApiServices apiServices) {
+        return new HomeRepositoryImpl(apiServices);
     }
 
 }
