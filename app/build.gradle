@@ -35,11 +35,13 @@ android {
             initWith(buildTypes.debug)
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", '"http://myapiname.azurewebservices.net"')
         }
         live {
             initWith(buildTypes.debug)
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", '"http://myapiname.azurewebservices.net"')
         }
         release {
             signingConfig signingConfigs.release

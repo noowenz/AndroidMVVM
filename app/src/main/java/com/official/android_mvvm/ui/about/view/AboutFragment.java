@@ -14,7 +14,7 @@
  *  limitations under the License
  */
 
-package com.official.android_mvvm.about.view;
+package com.official.android_mvvm.ui.about.view;
 
 
 import android.os.Bundle;
@@ -23,7 +23,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.official.android_mvvm.R;
-import com.official.android_mvvm.about.viewModel.AboutViewModel;
+import com.official.android_mvvm.ui.about.viewModel.AboutViewModel;
 import com.official.android_mvvm.base.BaseFragment;
 
 import javax.inject.Inject;

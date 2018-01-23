@@ -16,10 +16,14 @@
 
 package com.official.android_mvvm.base;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.res.Resources;
 
-import com.official.android_mvvm.helpers.SharedPreference;
+import com.official.android_mvvm.data.common.Response;
+import com.official.android_mvvm.data.SharedPreference;
+import com.official.android_mvvm.rx.Schedulers;
+
 import io.reactivex.disposables.CompositeDisposable;
 
 public abstract class BaseViewModel<T> extends ViewModel {
@@ -28,12 +32,16 @@ public abstract class BaseViewModel<T> extends ViewModel {
     private Resources resources;
     private CompositeDisposable mCompositeDisposable;
     private T repository;
+    private final MutableLiveData<Response> response;
+    private final Schedulers schedulersFacade;
 
     public BaseViewModel(T repository, SharedPreference prefs, Resources resources) {
         this.repository = repository;
         this.prefs = prefs;
         this.resources = resources;
         this.mCompositeDisposable = new CompositeDisposable();
+        this.response= new MutableLiveData<>();
+        this.schedulersFacade = new Schedulers();
     }
 
     public T getRepository() {
@@ -51,6 +59,17 @@ public abstract class BaseViewModel<T> extends ViewModel {
     public CompositeDisposable getCompositeDisposable() {
         return mCompositeDisposable;
     }
+
+    public MutableLiveData<Response> getResponse() {
+
+        return response;
+    }
+
+    public Schedulers getSchedulersFacade() {
+
+        return schedulersFacade;
+    }
+
 
     @Override
     protected void onCleared() {

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.official.android_mvvm.home.view.HomeActivity"
+    tools:context=".ui.home.view.HomeActivity"
     android:background="@color/black_effective"
     android:id="@+id/rl_home">
 

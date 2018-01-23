@@ -14,15 +14,17 @@
  *  limitations under the License
  */
 
-package com.official.android_mvvm.about.view;
+package com.official.android_mvvm.ui.about.viewModel;
 
-import dagger.Module;
-import dagger.android.ContributesAndroidInjector;
+import android.content.res.Resources;
 
-@Module
-public abstract class AboutFragmentProvider {
+import com.official.android_mvvm.base.BaseViewModel;
+import com.official.android_mvvm.data.SharedPreference;
 
-    @ContributesAndroidInjector(modules = AboutFragmentModule.class)
-    abstract AboutFragment provideAboutFragmentFactory();
+public class AboutViewModel extends BaseViewModel {
+
+    public AboutViewModel(SharedPreference prefs, Resources resources) {
+        super(null, prefs, resources);
+    }
 
 }

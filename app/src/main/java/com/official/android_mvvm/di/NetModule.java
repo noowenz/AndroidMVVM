@@ -8,11 +8,11 @@ import android.util.Log;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.official.android_mvvm.helpers.CommonDef;
-import com.official.android_mvvm.helpers.SharedPreference;
-import com.official.android_mvvm.helpers.UrlHelpers;
-import com.official.android_mvvm.retrofit.ApiServices;
-import com.official.android_mvvm.retrofit.Tls12SocketFactory;
+import com.official.android_mvvm.BuildConfig;
+import com.official.android_mvvm.helper.Constant;
+import com.official.android_mvvm.data.SharedPreference;
+import com.official.android_mvvm.data.ApiServices;
+import com.official.android_mvvm.data.Tls12SocketFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class NetModule {
 
     @Provides
     @Singleton
-    @Named(CommonDef.SharedPreferences.DEVICE_ID)
+    @Named(Constant.SharedPreferences.DEVICE_ID)
     String provideDeviceId(Application application) {
         String deviceID = Settings.Secure.getString(application.getContentResolver(), Settings.Secure.ANDROID_ID);
         return deviceID;
@@ -136,7 +136,7 @@ public class NetModule {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .baseUrl(UrlHelpers.BASE_URL)
+                .baseUrl(BuildConfig.BASE_URL)
                 .client(getNewHttpClient(cache))
                 .build();
         return retrofit;
