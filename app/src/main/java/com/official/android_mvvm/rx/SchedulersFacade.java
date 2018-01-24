@@ -10,24 +10,24 @@ import io.reactivex.schedulers.Schedulers;
  * Provides various threading schedulers.
  */
 
-public class Schedulers {
+public class SchedulersFacade {
 
     @Inject
-    public Schedulers() {
+    public SchedulersFacade() {
     }
 
     /**
      * IO thread pool scheduler
      */
     public Scheduler io() {
-        return io.reactivex.schedulers.Schedulers.io();
+        return Schedulers.io();
     }
 
     /**
      * Computation thread pool scheduler
      */
     public Scheduler computation() {
-        return io.reactivex.schedulers.Schedulers.computation();
+        return Schedulers.computation();
     }
 
     /**

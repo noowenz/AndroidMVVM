@@ -4,6 +4,7 @@ import com.official.android_mvvm.ui.home.model.User;
 import com.official.android_mvvm.data.ApiServices;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 
 
 /**
@@ -19,6 +20,7 @@ public class HomeRepositoryImpl implements IHomeRepository {
 
     @Override
     public Observable<User> getUser() {
-       return apiServices.getUsers();
+//        return apiServices.getUsers();
+        return Observable.just(new User("Nabin Shrestha", "nabin.shrestha@ebpearls.com", "noowenz.com.np"));
     }
 }

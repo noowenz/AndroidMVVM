@@ -20,11 +20,12 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.res.Resources;
 
-import com.official.android_mvvm.data.common.Response;
+import com.official.android_mvvm.data.common.LiveDataResponse;
 import com.official.android_mvvm.data.SharedPreference;
-import com.official.android_mvvm.rx.Schedulers;
+import com.official.android_mvvm.rx.SchedulersFacade;
 
 import io.reactivex.disposables.CompositeDisposable;
+import retrofit2.Response;
 
 public abstract class BaseViewModel<T> extends ViewModel {
 
@@ -32,8 +33,8 @@ public abstract class BaseViewModel<T> extends ViewModel {
     private Resources resources;
     private CompositeDisposable mCompositeDisposable;
     private T repository;
-    private final MutableLiveData<Response> response;
-    private final Schedulers schedulersFacade;
+    private final MutableLiveData<LiveDataResponse> response;
+    private final SchedulersFacade schedulers;
 
     public BaseViewModel(T repository, SharedPreference prefs, Resources resources) {
         this.repository = repository;
@@ -41,7 +42,7 @@ public abstract class BaseViewModel<T> extends ViewModel {
         this.resources = resources;
         this.mCompositeDisposable = new CompositeDisposable();
         this.response= new MutableLiveData<>();
-        this.schedulersFacade = new Schedulers();
+        this.schedulers = new SchedulersFacade();
     }
 
     public T getRepository() {
@@ -60,14 +61,14 @@ public abstract class BaseViewModel<T> extends ViewModel {
         return mCompositeDisposable;
     }
 
-    public MutableLiveData<Response> getResponse() {
+    public MutableLiveData<LiveDataResponse> getResponse() {
 
         return response;
     }
 
-    public Schedulers getSchedulersFacade() {
+    public SchedulersFacade getSchedulers() {
 
-        return schedulersFacade;
+        return schedulers;
     }
 
 

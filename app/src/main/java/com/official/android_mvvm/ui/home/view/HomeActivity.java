@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.official.android_mvvm.R;
 import com.official.android_mvvm.ui.about.view.AboutFragment;
 import com.official.android_mvvm.base.BaseActivity;
-import com.official.android_mvvm.data.common.Response;
+import com.official.android_mvvm.data.common.LiveDataResponse;
+import com.official.android_mvvm.ui.home.model.User;
 import com.official.android_mvvm.ui.home.viewModel.HomeViewModel;
 
 import javax.inject.Inject;
@@ -34,26 +36,29 @@ public class HomeActivity extends BaseActivity<HomeViewModel> implements HasSupp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        homeViewModel.getResponse().observe(this, response -> processResponse(response));
+        homeViewModel.getResponse().observe(this, liveDataResponse -> processResponse(liveDataResponse));
         init();
     }
 
     private void init() {
-        homeViewModel.getUser();
+        if (isNetworkConnected())
+            homeViewModel.getUser();
+        else
+            Toast.makeText(this, "No internet connection available.", Toast.LENGTH_SHORT).show();
     }
 
-    private void processResponse(Response response) {
-        switch (response.status) {
+    private void processResponse(LiveDataResponse liveDataResponse) {
+        switch (liveDataResponse.status) {
             case LOADING:
                 renderLoadingState();
                 break;
 
             case SUCCESS:
-                renderDataState(response.data);
+                renderDataState((User) liveDataResponse.data);
                 break;
 
             case ERROR:
-                renderErrorState(response.error);
+                renderErrorState(liveDataResponse.error);
                 break;
         }
     }
@@ -62,9 +67,10 @@ public class HomeActivity extends BaseActivity<HomeViewModel> implements HasSupp
         hideLoading();
     }
 
-    private void renderDataState(String data) {
-        tvMsg.setText(data);
+    private void renderDataState(User data) {
         hideLoading();
+        tvMsg.setText(data.getName());
+        tvMsg.setText(homeViewModel.getEmail());
     }
 
     private void renderLoadingState() {
