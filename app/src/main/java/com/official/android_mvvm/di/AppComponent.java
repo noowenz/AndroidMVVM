@@ -2,7 +2,7 @@ package com.official.android_mvvm.di;
 
 
 import android.app.Application;
-import com.official.android_mvvm.utils.MyApplication;
+import com.official.android_mvvm.util.MyApplication;
 
 import javax.inject.Singleton;
 

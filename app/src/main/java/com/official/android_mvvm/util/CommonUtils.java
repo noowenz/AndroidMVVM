@@ -14,7 +14,7 @@
  *  limitations under the License
  */
 
-package com.official.android_mvvm.utils;
+package com.official.android_mvvm.util;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

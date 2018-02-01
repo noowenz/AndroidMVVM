@@ -14,20 +14,20 @@
  *  limitations under the License
  */
 
-package com.official.android_mvvm.ui.home.view;
-import com.official.android_mvvm.ui.home.repository.HomeRepositoryImpl;
-import com.official.android_mvvm.data.ApiServices;
+package com.official.android_mvvm.ui.about;
+import android.content.res.Resources;
+
+import com.official.android_mvvm.ui.about.viewModel.AboutViewModel;
+import com.official.android_mvvm.data.SharedPreference;
 
 import dagger.Module;
 import dagger.Provides;
 
-
 @Module
-public class HomeActivityModule {
+public class AboutFragmentModule {
 
     @Provides
-    HomeRepositoryImpl provideHomeRepositoryImpl(ApiServices apiServices) {
-        return new HomeRepositoryImpl(apiServices);
+    AboutViewModel provideAboutViewModel(SharedPreference preference, Resources resources) {
+        return new AboutViewModel(preference, resources);
     }
-
 }

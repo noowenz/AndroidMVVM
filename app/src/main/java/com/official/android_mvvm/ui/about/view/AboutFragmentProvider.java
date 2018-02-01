@@ -16,6 +16,8 @@
 
 package com.official.android_mvvm.ui.about.view;
 
+import com.official.android_mvvm.ui.about.AboutFragmentModule;
+
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 

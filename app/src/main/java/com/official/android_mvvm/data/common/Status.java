@@ -6,5 +6,5 @@ package com.official.android_mvvm.data.common;
 public enum Status {
     LOADING,
     SUCCESS,
-    ERROR
+    ERROR,
 }

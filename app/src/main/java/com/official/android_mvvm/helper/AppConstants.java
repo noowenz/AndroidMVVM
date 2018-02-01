@@ -3,9 +3,10 @@ package com.official.android_mvvm.helper;
 /**
  * Created by nabin on 9/7/16.
  */
-public class Constant {
-    public static final String TAG = "CrewgoStaff";
-    public static final int REQUEST_ACCEPT_IGNORE = 03;
+public class AppConstants {
+    public static final String TAG = "AndroidMVVM";
+    public static final int REQUEST_USER = 0001;
+    public static final int REQUEST_USER_DETAILS = 0002;
 
     public class SharedPreferences {
         public final static String isLoggedIn="isLoggedIn";

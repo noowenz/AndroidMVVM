@@ -9,7 +9,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.official.android_mvvm.BuildConfig;
-import com.official.android_mvvm.helper.Constant;
+import com.official.android_mvvm.helper.AppConstants;
 import com.official.android_mvvm.data.SharedPreference;
 import com.official.android_mvvm.data.ApiServices;
 import com.official.android_mvvm.data.Tls12SocketFactory;
@@ -48,7 +48,7 @@ public class NetModule {
 
     @Provides
     @Singleton
-    @Named(Constant.SharedPreferences.DEVICE_ID)
+    @Named(AppConstants.SharedPreferences.DEVICE_ID)
     String provideDeviceId(Application application) {
         String deviceID = Settings.Secure.getString(application.getContentResolver(), Settings.Secure.ANDROID_ID);
         return deviceID;

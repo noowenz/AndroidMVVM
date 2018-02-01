@@ -24,15 +24,17 @@ import com.official.android_mvvm.data.common.LiveDataResponse;
 import com.official.android_mvvm.data.SharedPreference;
 import com.official.android_mvvm.rx.SchedulersFacade;
 
-import io.reactivex.disposables.CompositeDisposable;
-import retrofit2.Response;
+import java.security.PublicKey;
 
-public abstract class BaseViewModel<T> extends ViewModel {
+import io.reactivex.disposables.CompositeDisposable;
+
+public abstract class BaseViewModel<T, M> extends ViewModel {
 
     private SharedPreference prefs;
     private Resources resources;
     private CompositeDisposable mCompositeDisposable;
     private T repository;
+    private M baseModel;
     private final MutableLiveData<LiveDataResponse> response;
     private final SchedulersFacade schedulers;
 
@@ -51,6 +53,14 @@ public abstract class BaseViewModel<T> extends ViewModel {
 
     public Resources getResources() {
         return resources;
+    }
+
+    public void setBaseModel(M baseModel) {
+        this.baseModel = baseModel;
+    }
+
+    public M getBaseModel() {
+        return baseModel;
     }
 
     public SharedPreference getSharedPreference() {

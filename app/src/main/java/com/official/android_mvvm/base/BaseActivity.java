@@ -28,8 +28,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.official.android_mvvm.utils.CommonUtils;
-import com.official.android_mvvm.utils.NetworkUtils;
+import com.official.android_mvvm.util.CommonUtils;
+import com.official.android_mvvm.util.NetworkUtils;
 
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;

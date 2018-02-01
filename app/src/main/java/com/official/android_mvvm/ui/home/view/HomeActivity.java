@@ -7,10 +7,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.official.android_mvvm.R;
+import com.official.android_mvvm.helper.AppConstants;
 import com.official.android_mvvm.ui.about.view.AboutFragment;
 import com.official.android_mvvm.base.BaseActivity;
 import com.official.android_mvvm.data.common.LiveDataResponse;
-import com.official.android_mvvm.ui.home.model.User;
+import com.official.android_mvvm.ui.home.model.HomeModel;
 import com.official.android_mvvm.ui.home.viewModel.HomeViewModel;
 
 import javax.inject.Inject;
@@ -26,6 +27,9 @@ public class HomeActivity extends BaseActivity<HomeViewModel> implements HasSupp
     @BindView(R.id.tv_msg)
     TextView tvMsg;
 
+    @BindView(R.id.tv_msg2)
+    TextView tvMsg2;
+
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
@@ -36,15 +40,19 @@ public class HomeActivity extends BaseActivity<HomeViewModel> implements HasSupp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        homeViewModel.getResponse().observe(this, liveDataResponse -> processResponse(liveDataResponse));
         init();
     }
 
     private void init() {
-        if (isNetworkConnected())
-            homeViewModel.getUser();
-        else
+        if (isNetworkConnected()) {
+            homeViewModel.setBaseModel();
+            homeViewModel.getResponse().observe(this, liveDataResponse -> processResponse(liveDataResponse));
+            homeViewModel.getUser(AppConstants.REQUEST_USER);
+            homeViewModel.getUserDetails(AppConstants.REQUEST_USER_DETAILS);
+
+        } else {
             Toast.makeText(this, "No internet connection available.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void processResponse(LiveDataResponse liveDataResponse) {
@@ -54,7 +62,7 @@ public class HomeActivity extends BaseActivity<HomeViewModel> implements HasSupp
                 break;
 
             case SUCCESS:
-                renderDataState((User) liveDataResponse.data);
+                renderDataState((HomeModel) liveDataResponse.data, liveDataResponse.requestCode);
                 break;
 
             case ERROR:
@@ -65,12 +73,15 @@ public class HomeActivity extends BaseActivity<HomeViewModel> implements HasSupp
 
     private void renderErrorState(Throwable error) {
         hideLoading();
+        error.printStackTrace();
     }
 
-    private void renderDataState(User data) {
+    private void renderDataState(HomeModel data, int requestCode) {
         hideLoading();
-        tvMsg.setText(data.getName());
-        tvMsg.setText(homeViewModel.getEmail());
+        if (requestCode == AppConstants.REQUEST_USER)
+            tvMsg.setText(data.getUser().getName());
+        else
+            tvMsg2.setText(data.getUserDetails().getAddress());
     }
 
     private void renderLoadingState() {

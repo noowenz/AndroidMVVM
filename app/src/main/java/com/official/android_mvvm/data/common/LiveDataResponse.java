@@ -15,26 +15,30 @@ public class LiveDataResponse<T> {
     public final Status status;
 
     @Nullable
+    public final int requestCode;
+
+    @Nullable
     public final T data;
 
     @Nullable
     public final Throwable error;
 
-    private LiveDataResponse(Status status, @Nullable T data, @Nullable Throwable error) {
+    private LiveDataResponse(Status status, @Nullable T data, @Nullable Throwable error, int request_code) {
         this.status = status;
         this.data = data;
         this.error = error;
+        this.requestCode = request_code;
     }
 
-    public static LiveDataResponse loading() {
-        return new LiveDataResponse(LOADING, null, null);
+    public static LiveDataResponse loading(int request_code) {
+        return new LiveDataResponse(LOADING, null, null, request_code);
     }
 
-    public static <T> LiveDataResponse success(@NonNull T data) {
-        return new LiveDataResponse(SUCCESS, data, null);
+    public static <T> LiveDataResponse success(@NonNull T data, int request_code) {
+        return new LiveDataResponse(SUCCESS, data, null, request_code);
     }
 
-    public static LiveDataResponse error(@NonNull Throwable error) {
-        return new LiveDataResponse(ERROR, null, error);
+    public static LiveDataResponse error(@NonNull Throwable error, int request_code) {
+        return new LiveDataResponse(ERROR, null, error, request_code);
     }
 }
