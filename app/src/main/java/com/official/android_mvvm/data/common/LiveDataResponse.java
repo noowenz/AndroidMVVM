@@ -21,9 +21,9 @@ public class LiveDataResponse<T> {
     public final T data;
 
     @Nullable
-    public final Throwable error;
+    public final String error;
 
-    private LiveDataResponse(Status status, @Nullable T data, @Nullable Throwable error, int request_code) {
+    private LiveDataResponse(Status status, @Nullable T data, @Nullable String error, @Nullable int request_code) {
         this.status = status;
         this.data = data;
         this.error = error;
@@ -38,7 +38,7 @@ public class LiveDataResponse<T> {
         return new LiveDataResponse(SUCCESS, data, null, request_code);
     }
 
-    public static LiveDataResponse error(@NonNull Throwable error, int request_code) {
+    public static LiveDataResponse error(@NonNull String error, int request_code) {
         return new LiveDataResponse(ERROR, null, error, request_code);
     }
 }

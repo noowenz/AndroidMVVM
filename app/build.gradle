@@ -91,9 +91,10 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
 
     //Viewmodel
-    compile "android.arch.lifecycle:extensions:$rootProject.lifecycle"
+    compile "android.arch.lifecycle:runtime:$rootProject.lifecycle"
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.lifecycle"
     compile "android.arch.lifecycle:extensions:$rootProject.lifecycle"
+    implementation "android.arch.lifecycle:reactivestreams:$rootProject.lifecycle"
 
     //Butterknife
     compile "com.jakewharton:butterknife:${rootProject.butterknifeVersion}"

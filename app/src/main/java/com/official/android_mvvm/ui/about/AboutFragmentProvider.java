@@ -14,9 +14,10 @@
  *  limitations under the License
  */
 
-package com.official.android_mvvm.ui.about.view;
+package com.official.android_mvvm.ui.about;
 
 import com.official.android_mvvm.ui.about.AboutFragmentModule;
+import com.official.android_mvvm.ui.about.view.AboutFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

@@ -17,29 +17,51 @@
 package com.official.android_mvvm.ui.about.view;
 
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.official.android_mvvm.R;
-import com.official.android_mvvm.ui.about.viewModel.AboutViewModel;
 import com.official.android_mvvm.base.BaseFragment;
+import com.official.android_mvvm.data.common.LiveDataResponse;
+import com.official.android_mvvm.ui.about.viewModel.AboutViewModel;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
-public class AboutFragment extends BaseFragment<AboutViewModel> {
+public class AboutFragment extends BaseFragment<AboutViewModel> implements AboutNavigator {
 
     public static final String TAG = AboutFragment.class.getSimpleName();
 
     @BindView(R.id.tv_about)
     TextView tvAbout;
+    @BindView(R.id.pb_loading)
+    ProgressBar pbLoading;
+    @BindView(R.id.iv_error)
+    ImageView ivError;
+    @BindView(R.id.tv_refresh)
+    TextView tvRefresh;
+    @BindView(R.id.ll_progress)
+    LinearLayout llProgress;
+    Unbinder unbinder;
 
     @Inject
     AboutViewModel mAboutViewModel;
+
+    @Inject
+    ViewModelProvider.Factory mViewModelFactory;
 
     public static AboutFragment newInstance() {
         Bundle args = new Bundle();
@@ -59,8 +81,30 @@ public class AboutFragment extends BaseFragment<AboutViewModel> {
         init();
     }
 
-    private void init(){
-        tvAbout.setText("I am Nabin Shrestha");
+    @Override
+    public void init() {
+        if (isNetworkConnected()) {
+            tvAbout.setVisibility(View.VISIBLE);
+            llProgress.setVisibility(View.GONE);
+
+//            showLoadingDialog(false);
+            tvAbout.setText("I am Nabin Shrestha");
+        } else {
+            tvAbout.setVisibility(View.GONE);
+            llProgress.setVisibility(View.VISIBLE);
+
+            Toast.makeText(getActivity(), "No internet connection available.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void showProgressBar() {
+        pbLoading.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        pbLoading.setVisibility(View.GONE);
     }
 
     @Override
@@ -73,7 +117,21 @@ public class AboutFragment extends BaseFragment<AboutViewModel> {
         return R.layout.fragment_about;
     }
 
+    @Override
     public void goBack() {
         getBaseActivity().onFragmentDetached(TAG);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

@@ -16,29 +16,31 @@
 
 package com.official.android_mvvm.base;
 
+import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
+import com.jakewharton.rxbinding2.internal.GenericTypeNullable;
 import com.official.android_mvvm.data.common.LiveDataResponse;
 import com.official.android_mvvm.data.SharedPreference;
 import com.official.android_mvvm.rx.SchedulersFacade;
-
-import java.security.PublicKey;
-
 import io.reactivex.disposables.CompositeDisposable;
 
-public abstract class BaseViewModel<T, M> extends ViewModel {
+public abstract class BaseViewModel<R, M, N> extends ViewModel implements LifecycleObserver {
 
+    private R repository;
+    private M baseModel;
+    private N mNavigator;
     private SharedPreference prefs;
     private Resources resources;
     private CompositeDisposable mCompositeDisposable;
-    private T repository;
-    private M baseModel;
     private final MutableLiveData<LiveDataResponse> response;
     private final SchedulersFacade schedulers;
 
-    public BaseViewModel(T repository, SharedPreference prefs, Resources resources) {
+    public BaseViewModel(R repository, SharedPreference prefs, Resources resources) {
         this.repository = repository;
         this.prefs = prefs;
         this.resources = resources;
@@ -47,7 +49,15 @@ public abstract class BaseViewModel<T, M> extends ViewModel {
         this.schedulers = new SchedulersFacade();
     }
 
-    public T getRepository() {
+    public void setNavigator(N navigator) {
+        this.mNavigator = navigator;
+    }
+
+    public N getNavigator() {
+        return mNavigator;
+    }
+
+    public R getRepository() {
         return repository;
     }
 

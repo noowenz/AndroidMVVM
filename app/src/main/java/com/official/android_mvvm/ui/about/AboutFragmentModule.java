@@ -15,10 +15,13 @@
  */
 
 package com.official.android_mvvm.ui.about;
+import android.arch.lifecycle.ViewModelProvider;
 import android.content.res.Resources;
 
 import com.official.android_mvvm.ui.about.viewModel.AboutViewModel;
 import com.official.android_mvvm.data.SharedPreference;
+import com.official.android_mvvm.ui.home.viewModel.HomeViewModel;
+import com.official.android_mvvm.util.ViewModelProviderFactory;
 
 import dagger.Module;
 import dagger.Provides;

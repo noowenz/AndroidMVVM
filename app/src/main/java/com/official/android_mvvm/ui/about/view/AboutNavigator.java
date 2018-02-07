@@ -14,21 +14,11 @@
  *  limitations under the License
  */
 
-package com.official.android_mvvm.ui.about.viewModel;
+package com.official.android_mvvm.ui.about.view;
 
-import android.content.res.Resources;
 
-import com.official.android_mvvm.base.BaseViewModel;
-import com.official.android_mvvm.data.SharedPreference;
-import com.official.android_mvvm.ui.about.view.AboutNavigator;
+public interface AboutNavigator {
 
-public class AboutViewModel extends BaseViewModel<Void, Void, AboutNavigator> {
+    void goBack();
 
-    public AboutViewModel(SharedPreference prefs, Resources resources) {
-        super(null, prefs, resources);
-    }
-
-    public void onNavBackClick() {
-        getNavigator().goBack();
-    }
 }

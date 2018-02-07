@@ -28,13 +28,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.official.android_mvvm.data.common.LiveDataResponse;
+import com.official.android_mvvm.ui.home.model.HomeModel;
 import com.official.android_mvvm.util.CommonUtils;
 import com.official.android_mvvm.util.NetworkUtils;
 
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
 
-public abstract class BaseActivity<V extends BaseViewModel> extends AppCompatActivity implements BaseFragment.Callback{
+public abstract class BaseActivity<V extends BaseViewModel, M> extends AppCompatActivity implements BaseFragment.Callback {
 
     private ProgressDialog mProgressDialog;
     private V mViewModel;
@@ -44,7 +46,7 @@ public abstract class BaseActivity<V extends BaseViewModel> extends AppCompatAct
         performDependencyInjection();
         super.onCreate(savedInstanceState);
         performBindingViewModel();
-        performButterknifeBind();
+        performButterKnifeBind();
     }
 
     private void performBindingViewModel() {
@@ -77,16 +79,39 @@ public abstract class BaseActivity<V extends BaseViewModel> extends AppCompatAct
         return NetworkUtils.isNetworkConnected(getApplicationContext());
     }
 
-    public void showLoading() {
-        hideLoading();
-        mProgressDialog = CommonUtils.showLoadingDialog(this);
+    public void showLoadingDialog(boolean isToInterruptUser) {
+        if (isToInterruptUser) {
+            hideLoadingDialog(isToInterruptUser);
+            mProgressDialog = CommonUtils.showLoadingDialog(this);
+        } else {
+            showProgressBar();
+        }
+
     }
 
-    public void hideLoading() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.cancel();
+    public void hideLoadingDialog(boolean isToInterruptUser) {
+        if (isToInterruptUser) {
+            if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                mProgressDialog.cancel();
+            }
+        } else {
+            hideProgressBar();
         }
     }
+
+    public abstract void init();
+
+    public abstract void processResponse(LiveDataResponse liveDataResponse);
+
+    public abstract void renderErrorState(String error);
+
+    public abstract void renderDataState(M data, int requestCode);
+
+    public abstract void renderLoadingState();
+
+    public abstract void showProgressBar();
+
+    public abstract void hideProgressBar();
 
     /**
      * Override for set view model
@@ -105,7 +130,7 @@ public abstract class BaseActivity<V extends BaseViewModel> extends AppCompatAct
         AndroidInjection.inject(this);
     }
 
-    public void performButterknifeBind() {
+    public void performButterKnifeBind() {
         super.setContentView(getLayoutId());
         ButterKnife.bind(this);
     }

@@ -15,8 +15,14 @@
  */
 
 package com.official.android_mvvm.ui.home;
+import android.arch.lifecycle.ViewModelProvider;
+
 import com.official.android_mvvm.ui.home.repository.HomeRepositoryImpl;
 import com.official.android_mvvm.data.ApiServices;
+import com.official.android_mvvm.ui.home.viewModel.HomeViewModel;
+import com.official.android_mvvm.util.ViewModelProviderFactory;
+
+import javax.inject.Inject;
 
 import dagger.Module;
 import dagger.Provides;
@@ -28,6 +34,11 @@ public class HomeActivityModule {
     @Provides
     HomeRepositoryImpl provideHomeRepositoryImpl(ApiServices apiServices) {
         return new HomeRepositoryImpl(apiServices);
+    }
+
+    @Provides
+    ViewModelProvider.Factory homeViewModelProvider(HomeViewModel homeViewModel) {
+        return new ViewModelProviderFactory<>(homeViewModel);
     }
 
 }

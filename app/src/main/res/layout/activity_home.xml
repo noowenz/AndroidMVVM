@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.view.HomeActivity"
-    android:id="@+id/rl_home">
+    tools:context=".ui.home.view.HomeActivity">
 
-    <TextView
-        android:id="@+id/tv_msg"
+    <include
+        layout="@layout/layout_process" />
+
+    <LinearLayout
+        android:id="@+id/ll_main_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="@dimen/space10"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:text=""
-        android:textColor="@color/black_effective"
-        android:textSize="@dimen/txt_20" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_msg2"
-        android:layout_below="@+id/tv_msg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="@dimen/space10"
-        android:gravity="center"
-        android:text=""
-        android:textColor="@color/black_effective"
-        android:textSize="@dimen/txt_20" />
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black_effective"
+            android:textSize="@dimen/txt_20" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_msg2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_msg"
+            android:text=""
+            android:textColor="@color/black_effective"
+            android:textSize="@dimen/txt_20" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

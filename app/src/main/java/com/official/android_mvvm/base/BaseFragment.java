@@ -16,6 +16,7 @@
 
 package com.official.android_mvvm.base;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -25,12 +26,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.official.android_mvvm.data.common.LiveDataResponse;
+import com.official.android_mvvm.util.CommonUtils;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.support.AndroidSupportInjection;
 
 public abstract class BaseFragment<V extends BaseViewModel> extends Fragment {
 
+    private ProgressDialog mProgressDialog;
     private BaseActivity mActivity;
     private V mViewModel;
     private View mRootView;
@@ -85,6 +90,32 @@ public abstract class BaseFragment<V extends BaseViewModel> extends Fragment {
             mActivity.hideKeyboard();
         }
     }
+
+    public void showLoadingDialog(boolean isToInterruptUser) {
+        if (isToInterruptUser) {
+            hideLoadingDialog(isToInterruptUser);
+            mProgressDialog = CommonUtils.showLoadingDialog(getActivity());
+        } else {
+            showProgressBar();
+        }
+
+    }
+
+    public void hideLoadingDialog(boolean isToInterruptUser) {
+        if (isToInterruptUser) {
+            if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                mProgressDialog.cancel();
+            }
+        } else {
+            hideProgressBar();
+        }
+    }
+
+    public abstract void init();
+
+    public abstract void showProgressBar();
+
+    public abstract void hideProgressBar();
 
     private void performDependencyInjection() {
         AndroidSupportInjection.inject(this);

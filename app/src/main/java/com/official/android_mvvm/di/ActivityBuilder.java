@@ -1,6 +1,6 @@
 package com.official.android_mvvm.di;
 
-import com.official.android_mvvm.ui.about.view.AboutFragmentProvider;
+import com.official.android_mvvm.ui.about.AboutFragmentProvider;
 import com.official.android_mvvm.ui.home.HomeActivityModule;
 import com.official.android_mvvm.ui.home.view.HomeActivity;
 
