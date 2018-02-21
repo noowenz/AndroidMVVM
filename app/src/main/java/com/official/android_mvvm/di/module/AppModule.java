@@ -1,4 +1,4 @@
-package com.official.android_mvvm.di;
+package com.official.android_mvvm.di.module;
 
 import android.app.Application;
 import android.content.res.Resources;

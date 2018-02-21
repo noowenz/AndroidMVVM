@@ -14,17 +14,27 @@
  *  limitations under the License
  */
 
-package com.official.android_mvvm.ui.about;
+package com.official.android_mvvm.util.rx;
 
-import com.official.android_mvvm.ui.about.view.AboutFragment;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-import dagger.Module;
-import dagger.android.ContributesAndroidInjector;
+public class AppSchedulerProvider implements SchedulerProvider {
 
-@Module
-public abstract class AboutFragmentProvider {
+    @Override
+    public Scheduler ui() {
+        return AndroidSchedulers.mainThread();
+    }
 
-    @ContributesAndroidInjector(modules = AboutFragmentModule.class)
-    abstract AboutFragment provideAboutFragmentFactory();
+    @Override
+    public Scheduler computation() {
+        return Schedulers.computation();
+    }
+
+    @Override
+    public Scheduler io() {
+        return Schedulers.io();
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.official.android_mvvm.data;
+package com.official.android_mvvm.data.local.prefs;
 
 import android.app.Application;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.official.android_mvvm.data;
+package com.official.android_mvvm.data.remote;
 
 import java.io.IOException;
 import java.net.InetAddress;

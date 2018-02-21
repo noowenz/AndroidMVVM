@@ -1,4 +1,4 @@
-package com.official.android_mvvm.di;
+package com.official.android_mvvm.di.builder;
 
 import com.official.android_mvvm.ui.about.AboutFragmentProvider;
 import com.official.android_mvvm.ui.home.HomeActivityModule;

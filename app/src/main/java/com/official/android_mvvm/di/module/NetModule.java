@@ -1,6 +1,7 @@
-package com.official.android_mvvm.di;
+package com.official.android_mvvm.di.module;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
@@ -10,9 +11,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.official.android_mvvm.BuildConfig;
 import com.official.android_mvvm.helper.AppConstants;
-import com.official.android_mvvm.data.SharedPreference;
-import com.official.android_mvvm.data.ApiServices;
-import com.official.android_mvvm.data.Tls12SocketFactory;
+import com.official.android_mvvm.data.local.prefs.SharedPreference;
+import com.official.android_mvvm.data.remote.ApiServices;
+import com.official.android_mvvm.data.remote.Tls12SocketFactory;
+import com.official.android_mvvm.util.rx.AppSchedulerProvider;
+import com.official.android_mvvm.util.rx.SchedulerProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +42,17 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  */
 @Module
 public class NetModule {
+
+    @Provides
+    @Singleton
+    Context provideContext(Application application) {
+        return application;
+    }
+
+    @Provides
+    SchedulerProvider provideSchedulerProvider() {
+        return new AppSchedulerProvider();
+    }
 
     @Provides
     @Singleton

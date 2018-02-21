@@ -15,13 +15,13 @@
  */
 
 package com.official.android_mvvm.ui.about;
-import android.arch.lifecycle.ViewModelProvider;
+
 import android.content.res.Resources;
 
+import com.official.android_mvvm.data.remote.ApiServices;
 import com.official.android_mvvm.ui.about.viewModel.AboutViewModel;
-import com.official.android_mvvm.data.SharedPreference;
-import com.official.android_mvvm.ui.home.viewModel.HomeViewModel;
-import com.official.android_mvvm.util.ViewModelProviderFactory;
+import com.official.android_mvvm.data.local.prefs.SharedPreference;
+import com.official.android_mvvm.util.rx.SchedulerProvider;
 
 import dagger.Module;
 import dagger.Provides;
@@ -30,7 +30,7 @@ import dagger.Provides;
 public class AboutFragmentModule {
 
     @Provides
-    AboutViewModel provideAboutViewModel(SharedPreference preference, Resources resources) {
-        return new AboutViewModel(preference, resources);
+    AboutViewModel provideAboutViewModel(ApiServices apiServices, SharedPreference prefs, Resources resources, SchedulerProvider schedulerProvider) {
+        return new AboutViewModel(apiServices, prefs, resources, schedulerProvider);
     }
 }

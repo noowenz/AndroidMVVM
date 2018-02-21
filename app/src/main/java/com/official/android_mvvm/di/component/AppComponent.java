@@ -1,8 +1,12 @@
-package com.official.android_mvvm.di;
+package com.official.android_mvvm.di.component;
 
 
 import android.app.Application;
-import com.official.android_mvvm.util.MyApplication;
+
+import com.official.android_mvvm.di.module.AppModule;
+import com.official.android_mvvm.di.module.NetModule;
+import com.official.android_mvvm.di.builder.ActivityBuilder;
+import com.official.android_mvvm.MyApplication;
 
 import javax.inject.Singleton;
 

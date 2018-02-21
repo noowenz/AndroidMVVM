@@ -20,33 +20,32 @@ import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-import com.jakewharton.rxbinding2.internal.GenericTypeNullable;
 import com.official.android_mvvm.data.common.LiveDataResponse;
-import com.official.android_mvvm.data.SharedPreference;
-import com.official.android_mvvm.rx.SchedulersFacade;
+import com.official.android_mvvm.data.local.prefs.SharedPreference;
+import com.official.android_mvvm.data.remote.ApiServices;
+import com.official.android_mvvm.util.rx.SchedulerProvider;
+
 import io.reactivex.disposables.CompositeDisposable;
 
-public abstract class BaseViewModel<R, M, N> extends ViewModel implements LifecycleObserver {
+public abstract class BaseViewModel<M, N> extends ViewModel implements LifecycleObserver {
 
-    private R repository;
     private M baseModel;
     private N mNavigator;
+    private ApiServices apiServices;
     private SharedPreference prefs;
     private Resources resources;
     private CompositeDisposable mCompositeDisposable;
     private final MutableLiveData<LiveDataResponse> response;
-    private final SchedulersFacade schedulers;
+    private final SchedulerProvider mSchedulerProvider;
 
-    public BaseViewModel(R repository, SharedPreference prefs, Resources resources) {
-        this.repository = repository;
+    public BaseViewModel(ApiServices apiServices, SharedPreference prefs, Resources resources, SchedulerProvider schedulerProvider) {
+        this.apiServices = apiServices;
         this.prefs = prefs;
         this.resources = resources;
+        this.mSchedulerProvider = schedulerProvider;
         this.mCompositeDisposable = new CompositeDisposable();
         this.response= new MutableLiveData<>();
-        this.schedulers = new SchedulersFacade();
     }
 
     public void setNavigator(N navigator) {
@@ -57,12 +56,16 @@ public abstract class BaseViewModel<R, M, N> extends ViewModel implements Lifecy
         return mNavigator;
     }
 
-    public R getRepository() {
-        return repository;
+    public ApiServices getApiServices() {
+        return apiServices;
     }
 
     public Resources getResources() {
         return resources;
+    }
+
+    public SchedulerProvider getSchedulerProvider() {
+        return mSchedulerProvider;
     }
 
     public void setBaseModel(M baseModel) {
@@ -85,12 +88,6 @@ public abstract class BaseViewModel<R, M, N> extends ViewModel implements Lifecy
 
         return response;
     }
-
-    public SchedulersFacade getSchedulers() {
-
-        return schedulers;
-    }
-
 
     @Override
     protected void onCleared() {

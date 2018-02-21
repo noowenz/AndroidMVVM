@@ -1,9 +1,10 @@
-package com.official.android_mvvm.util;
+package com.official.android_mvvm;
 
 import android.app.Activity;
 import android.app.Application;
 
-import com.official.android_mvvm.di.DaggerAppComponent;
+
+import com.official.android_mvvm.di.component.DaggerAppComponent;
 
 import javax.inject.Inject;
 
