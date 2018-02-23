@@ -1,27 +1,20 @@
 package com.official.android_mvvm.di.module;
 
 import android.app.Application;
-import android.content.Context;
 import android.os.Build;
-import android.provider.Settings;
 import android.util.Log;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.official.android_mvvm.BuildConfig;
-import com.official.android_mvvm.helper.AppConstants;
-import com.official.android_mvvm.data.local.prefs.SharedPreference;
 import com.official.android_mvvm.data.remote.ApiServices;
 import com.official.android_mvvm.data.remote.Tls12SocketFactory;
-import com.official.android_mvvm.util.rx.AppSchedulerProvider;
-import com.official.android_mvvm.util.rx.SchedulerProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.net.ssl.SSLContext;
 
@@ -45,32 +38,6 @@ public class NetModule {
 
     @Provides
     @Singleton
-    Context provideContext(Application application) {
-        return application;
-    }
-
-    @Provides
-    SchedulerProvider provideSchedulerProvider() {
-        return new AppSchedulerProvider();
-    }
-
-    @Provides
-    @Singleton
-    SharedPreference providesSharedPreferences(Application application) {
-        return new SharedPreference(application);
-    }
-
-    @Provides
-    @Singleton
-    @Named(AppConstants.SharedPreferences.DEVICE_ID)
-    String provideDeviceId(Application application) {
-        String deviceID = Settings.Secure.getString(application.getContentResolver(), Settings.Secure.ANDROID_ID);
-        return deviceID;
-    }
-
-
-    @Provides
-    @Singleton
     Cache provideHttpCache(Application application) {
         int cacheSize = 10 * 1024 * 1024;
         Cache cache = new Cache(application.getCacheDir(), cacheSize);
@@ -83,18 +50,6 @@ public class NetModule {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
         return gsonBuilder.create();
-    }
-
-    @Provides
-    @Singleton
-    OkHttpClient provideOkHttpClient(Cache cache) {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
-        client.cache(cache);
-        client.addInterceptor(interceptor);
-        return client.build();
     }
 
     private OkHttpClient.Builder enableTls12OnPreLollipop(OkHttpClient.Builder client) {
@@ -126,7 +81,9 @@ public class NetModule {
      * @return OkHttpClient
      * This OKHttp is for https (SSL) request....
      */
-    private OkHttpClient getNewHttpClient(Cache cache) {
+    @Provides
+    @Singleton
+    OkHttpClient provideOkHttpClient(Cache cache) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -145,13 +102,13 @@ public class NetModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient,  Cache cache) {
+    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .baseUrl(BuildConfig.BASE_URL)
-                .client(getNewHttpClient(cache))
+                .client(okHttpClient)
                 .build();
         return retrofit;
     }

@@ -1,5 +1,6 @@
 package com.official.android_mvvm.ui.home.model;
 
+
 /**
  * Created by ebpearls on 2/1/2018.
  */

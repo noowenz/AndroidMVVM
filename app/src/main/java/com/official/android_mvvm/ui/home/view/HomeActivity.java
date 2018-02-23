@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.official.android_mvvm.R;
 import com.official.android_mvvm.base.BaseActivity;
 import com.official.android_mvvm.data.common.LiveDataResponse;
+import com.official.android_mvvm.data.model.UserDb;
 import com.official.android_mvvm.helper.AppConstants;
 import com.official.android_mvvm.ui.about.view.AboutFragment;
 import com.official.android_mvvm.ui.home.model.HomeModel;
@@ -154,10 +155,7 @@ public class HomeActivity extends BaseActivity<HomeViewModel, HomeModel> impleme
 
     @OnClick(R.id.tv_msg2)
     void changeLiveDataValue() {
-        HomeModel homeModel = new HomeModel();
-        homeModel.setUser(new User("Noowenz", "nabin.shrestha@ebpearls.com", "noowenz.com.np"));
-        homeModel.setUserDetails(new UserDetails("Kupondole, Nepal", "46546544664646"));
-        homeViewModel.getResponse().setValue(LiveDataResponse.success(homeModel, AppConstants.REQUEST_USER));
+        homeViewModel.changeModel();
     }
 
     @OnClick(R.id.tv_refresh)
@@ -203,10 +201,5 @@ public class HomeActivity extends BaseActivity<HomeViewModel, HomeModel> impleme
                 .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                 .add(R.id.rl_home, AboutFragment.newInstance(), AboutFragment.TAG)
                 .commit();
-    }
-
-    @Override
-    public void handleError(Throwable throwable) {
-
     }
 }

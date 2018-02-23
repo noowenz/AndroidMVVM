@@ -6,4 +6,5 @@ package com.official.android_mvvm.base;
 
 public interface IBaseViewModel {
     void setBaseModel();
+    void changeModel();
 }

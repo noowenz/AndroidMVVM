@@ -14,20 +14,35 @@
  *  limitations under the License
  */
 
-package com.official.android_mvvm.ui.about;
+package com.official.android_mvvm.data.local.prefs;
+
 
 import com.official.android_mvvm.data.DataManager;
-import com.official.android_mvvm.ui.about.viewModel.AboutViewModel;
-import com.official.android_mvvm.util.rx.SchedulerProvider;
 
-import dagger.Module;
-import dagger.Provides;
+public interface PreferencesHelper {
 
-@Module
-public class AboutFragmentModule {
+    int getCurrentUserLoggedInMode();
 
-    @Provides
-    AboutViewModel provideAboutViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        return new AboutViewModel(dataManager, schedulerProvider);
-    }
+    void setCurrentUserLoggedInMode(DataManager.LoggedInMode mode);
+
+    Long getCurrentUserId();
+
+    void setCurrentUserId(Long userId);
+
+    String getCurrentUserName();
+
+    void setCurrentUserName(String userName);
+
+    String getCurrentUserEmail();
+
+    void setCurrentUserEmail(String email);
+
+    String getCurrentUserProfilePicUrl();
+
+    void setCurrentUserProfilePicUrl(String profilePicUrl);
+
+    String getAccessToken();
+
+    void setAccessToken(String accessToken);
+
 }

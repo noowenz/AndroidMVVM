@@ -8,12 +8,13 @@ public class AppConstants {
     public static final int REQUEST_USER = 0001;
     public static final int REQUEST_USER_DETAILS = 0002;
 
-    public class SharedPreferences {
-        public final static String isLoggedIn="isLoggedIn";
-        public final static String USER_ID="userId";
-        public final static String DEVICE_ID="deviceId";
-        public final static String HASH_CODE="hashcode";
-        public final static String AUTH_KEY="auth_key";
-        public final static String IMAGE_URL="image_url";
-    }
+    public static final String STATUS_CODE_SUCCESS = "success";
+    public static final String STATUS_CODE_FAILED = "failed";
+
+    public static final int API_STATUS_CODE_LOCAL_ERROR = 0;
+
+    public static final String DB_NAME = "noowenz_mvvm.realm";
+    public static final String PREF_NAME = "noowenz_pref";
+
+    public static final long NULL_INDEX = -1L;
 }

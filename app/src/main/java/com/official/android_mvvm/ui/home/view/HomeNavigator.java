@@ -16,10 +16,8 @@
 
 package com.official.android_mvvm.ui.home.view;
 
+
 public interface HomeNavigator {
 
     void openAboutFragment();
-
-    void handleError(Throwable throwable);
-
 }

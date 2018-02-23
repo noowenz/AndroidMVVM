@@ -1,12 +1,12 @@
 package com.official.android_mvvm.ui.home.viewModel;
 
-import android.content.res.Resources;
 
 import com.official.android_mvvm.base.BaseViewModel;
 import com.official.android_mvvm.base.IBaseViewModel;
+import com.official.android_mvvm.data.DataManager;
 import com.official.android_mvvm.data.common.LiveDataResponse;
-import com.official.android_mvvm.data.local.prefs.SharedPreference;
-import com.official.android_mvvm.data.remote.ApiServices;
+import com.official.android_mvvm.data.local.db.AppDbHelper;
+import com.official.android_mvvm.helper.AppConstants;
 import com.official.android_mvvm.ui.home.model.HomeModel;
 import com.official.android_mvvm.ui.home.model.User;
 import com.official.android_mvvm.ui.home.model.UserDetails;
@@ -15,32 +15,34 @@ import com.official.android_mvvm.util.rx.SchedulerProvider;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
-
-import io.reactivex.Observable;
-
 /**
  * Created by nabin on 12/9/16.
  */
 
-public class HomeViewModel extends BaseViewModel<HomeModel, HomeNavigator> implements IBaseViewModel, IHomeViewModel {
+public class HomeViewModel extends BaseViewModel<HomeModel, HomeNavigator> implements IBaseViewModel, IHomeViewModel, AppDbHelper.OnRealmChangedListener {
 
-    public HomeViewModel(ApiServices apiServices, SharedPreference prefs, Resources resources, SchedulerProvider schedulerProvider) {
-        super(apiServices, prefs, resources, schedulerProvider);
+    public HomeViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+        super(dataManager, schedulerProvider);
     }
 
     @Override
     public void setBaseModel() {
         if (getBaseModel() == null)
             setBaseModel(new HomeModel());
+        getDataManager().addUserToDb(false);
+    }
+
+    @Override
+    public void changeModel() {
+        getDataManager().addUserToDb(true);
     }
 
     @Override
     public void getUser(int request_code) {
         if (getBaseModel().getUser() == null) {
-            getCompositeDisposable().add(Observable.just(new User("Nabin Shrestha", "nabin.shrestha@ebpearls.com", "noowenz.com.np"))
-                    .delay(5000, TimeUnit.MILLISECONDS)
-                    .subscribeOn(getSchedulerProvider().io())
+            getCompositeDisposable().add(getDataManager().getUsersFromDb(this, request_code)
+                    .delay(1000, TimeUnit.MILLISECONDS)
+                    .subscribeOn(getSchedulerProvider().ui())
                     .observeOn(getSchedulerProvider().ui())
                     .doOnSubscribe(__ -> getResponse().setValue(LiveDataResponse.loading(request_code)))
                     .subscribe(
@@ -60,9 +62,9 @@ public class HomeViewModel extends BaseViewModel<HomeModel, HomeNavigator> imple
     @Override
     public void getUserDetails(int requestCode) {
         if (getBaseModel().getUserDetails() == null) {
-            getCompositeDisposable().add(Observable.just(new UserDetails("KTM, Nepal", "9801111111"))
-                    .delay(5000, TimeUnit.MILLISECONDS)
-                    .subscribeOn(getSchedulerProvider().io())
+            getCompositeDisposable().add(getDataManager().getUserDetailsFromDb(this, requestCode)
+                    .delay(1000, TimeUnit.MILLISECONDS)
+                    .subscribeOn(getSchedulerProvider().ui())
                     .observeOn(getSchedulerProvider().ui())
                     .doOnSubscribe(__ -> getResponse().setValue(LiveDataResponse.loading(requestCode)))
                     .subscribe(
@@ -83,5 +85,16 @@ public class HomeViewModel extends BaseViewModel<HomeModel, HomeNavigator> imple
 
     public void openAboutFragment(){
         getNavigator().openAboutFragment();
+    }
+
+    @Override
+    public void OnChanged(Object changedDb, int request_code) {
+        if (request_code == AppConstants.REQUEST_USER){
+            getBaseModel().setUser((User) changedDb);
+            getResponse().setValue(LiveDataResponse.success(getBaseModel(), request_code));
+        } else {
+            getBaseModel().setUserDetails((UserDetails) changedDb);
+            getResponse().setValue(LiveDataResponse.success(getBaseModel(), request_code));
+        }
     }
 }

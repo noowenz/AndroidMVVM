@@ -21,9 +21,8 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.res.Resources;
 
+import com.official.android_mvvm.data.DataManager;
 import com.official.android_mvvm.data.common.LiveDataResponse;
-import com.official.android_mvvm.data.local.prefs.SharedPreference;
-import com.official.android_mvvm.data.remote.ApiServices;
 import com.official.android_mvvm.util.rx.SchedulerProvider;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -32,17 +31,13 @@ public abstract class BaseViewModel<M, N> extends ViewModel implements Lifecycle
 
     private M baseModel;
     private N mNavigator;
-    private ApiServices apiServices;
-    private SharedPreference prefs;
-    private Resources resources;
+    private DataManager dataManager;
     private CompositeDisposable mCompositeDisposable;
     private final MutableLiveData<LiveDataResponse> response;
     private final SchedulerProvider mSchedulerProvider;
 
-    public BaseViewModel(ApiServices apiServices, SharedPreference prefs, Resources resources, SchedulerProvider schedulerProvider) {
-        this.apiServices = apiServices;
-        this.prefs = prefs;
-        this.resources = resources;
+    public BaseViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+        this.dataManager = dataManager;
         this.mSchedulerProvider = schedulerProvider;
         this.mCompositeDisposable = new CompositeDisposable();
         this.response= new MutableLiveData<>();
@@ -56,12 +51,8 @@ public abstract class BaseViewModel<M, N> extends ViewModel implements Lifecycle
         return mNavigator;
     }
 
-    public ApiServices getApiServices() {
-        return apiServices;
-    }
-
-    public Resources getResources() {
-        return resources;
+    public DataManager getDataManager() {
+        return dataManager;
     }
 
     public SchedulerProvider getSchedulerProvider() {
@@ -74,10 +65,6 @@ public abstract class BaseViewModel<M, N> extends ViewModel implements Lifecycle
 
     public M getBaseModel() {
         return baseModel;
-    }
-
-    public SharedPreference getSharedPreference() {
-        return prefs;
     }
 
     public CompositeDisposable getCompositeDisposable() {

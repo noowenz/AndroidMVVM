@@ -14,20 +14,14 @@
  *  limitations under the License
  */
 
-package com.official.android_mvvm.ui.about;
+package com.official.android_mvvm.di;
 
-import com.official.android_mvvm.data.DataManager;
-import com.official.android_mvvm.ui.about.viewModel.AboutViewModel;
-import com.official.android_mvvm.util.rx.SchedulerProvider;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-import dagger.Module;
-import dagger.Provides;
+import javax.inject.Qualifier;
 
-@Module
-public class AboutFragmentModule {
-
-    @Provides
-    AboutViewModel provideAboutViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        return new AboutViewModel(dataManager, schedulerProvider);
-    }
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+public @interface PreferenceInfo {
 }

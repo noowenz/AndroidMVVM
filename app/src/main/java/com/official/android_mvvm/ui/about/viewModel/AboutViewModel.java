@@ -16,18 +16,15 @@
 
 package com.official.android_mvvm.ui.about.viewModel;
 
-import android.content.res.Resources;
-
 import com.official.android_mvvm.base.BaseViewModel;
-import com.official.android_mvvm.data.local.prefs.SharedPreference;
-import com.official.android_mvvm.data.remote.ApiServices;
+import com.official.android_mvvm.data.DataManager;
 import com.official.android_mvvm.ui.about.view.AboutNavigator;
 import com.official.android_mvvm.util.rx.SchedulerProvider;
 
 public class AboutViewModel extends BaseViewModel<Void, AboutNavigator> {
 
-    public AboutViewModel(ApiServices apiServices, SharedPreference prefs, Resources resources, SchedulerProvider schedulerProvider) {
-        super(apiServices, prefs, resources, schedulerProvider);
+    public AboutViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+        super(dataManager, schedulerProvider);
     }
 
     public void onNavBackClick() {

@@ -9,8 +9,8 @@ import retrofit2.http.GET;
 
 public interface ApiServices {
     @GET("users")
-    Observable<User> getUsers();
+    Observable<User> getUsersFromApi();
 
     @GET("users_details")
-    Observable<UserDetails> getUsersDetails();
+    Observable<UserDetails> getUsersDetailsFromApi();
 }
